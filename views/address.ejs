@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ../common/bootstrap.ejs %>
+    <link rel="shortcut icon" href="images/ofavicon.ico" />
+    <title></title>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.16/b-1.5.1/b-colvis-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/datatables.min.css"/>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.16/b-1.5.1/b-colvis-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/datatables.min.js"></script>
+
+  </head>
+  <body>
+    <div class="">
+        <%- include ../common/header.ejs %>
+    </div>
+    <div class="container">
+      <table id="userList" class="table table-striped" cellspacing="0" width="100%">
+        <thead>
+          <tr>
+            <td><%= i18n.addrList_label1%></td> <!--아이디-->
+            <td><%= i18n.addrList_label2%></td> <!--이름-->
+            <td><%= i18n.addrList_label3%></td> <!--계좌 주소-->
+            <td><%= i18n.addrList_label4%></td> <!--활동-->
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var index in addr){
+            var idTag = addr[index]['addr'] %>
+            <tr>
+              <td>
+                <%=addr[index]['email']%>
+                <% if(addr[index]['disabled']){ %>
+                  <span>(사용불가)</span>
+                <%}%>
+              </td>
+              <td><%=addr[index]['name']%></td>
+              <td><%=addr[index]['addr']%></td>
+              <td>
+                <a href="/permissions/<%=idTag%>"> <%= i18n.addrList_link1%></a> <!--권한-->
+                <a href="/addressDetail/<%=idTag%>"> <%= i18n.addrList_link2%></a> <!--사용자 정보-->
+                <a href="/ledger/<%=idTag%>"> <%= i18n.addrList_link3%></a> <!--거래내역 -->
+                <% if(addr[index]['isAdmin'] !== 'true'){ %>
+                <a href="/delete/<%=idTag%>"> <%= i18n.addrList_link4%></a> <!--삭제-->
+                <% }else{ %>
+                <text><span style="color:gray"> <%= i18n.addrList_link5%></span></text> <!--삭제-->
+                <% } %>
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+
+      <script type="text/javascript">
+      $(document).ready(function() {
+        $('#userList').DataTable({
+          dom: 'Blfrtip',
+          lengthMenu : [
+            [10, 25, 50, -1],
+            ['10 rows', '25 rows', '50 rows', 'Show all']
+          ],
+          buttons: [
+            'excel'
+          ]
+        });
+      });
+      </script>
+
+    </div>
+  </body>
+</html>

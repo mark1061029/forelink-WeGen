@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ../common/bootstrap.ejs %>
+    <link rel="shortcut icon" href="images/ofavicon.ico" />
+    <title></title>
+    <script>
+		function showKeyCode(event) {
+			event = event || window.event;
+			var keyID = (event.which) ? event.which : event.keyCode;
+			if( ( keyID >=48 && keyID <= 57 ) || ( keyID >=96 && keyID <= 105 ) || ( keyID == 8) || ( keyID == 9 )|| ( keyID == 46))
+			{
+				return;
+			}
+			else
+			{
+        swal({
+         type: 'error',
+         width: '40rem',
+         title: '입금액에 숫자만 입력하세요.',
+         text: 'Something went wrong!',
+      })
+				return false;
+			}
+			/* 48~57:일반 숫자키 코드, 96~105:숫자키패드 숫자키 코드 */
+		}
+	  </script>
+    <script>
+    function backKeyCode(event) {
+      event = event || window.event;
+      var keyID = (event.which) ? event.which : event.keyCode;
+      if( keyID === 8 )
+      {
+        return false;
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <%- include ../common/header.ejs %>
+    <div class="container">
+
+      <form class="form-horizontal" action="/sendAsset" method="post">
+        <div class="form-group">
+          <label for="formID"><%= i18n.sendAsset_formID%></label>
+          <input type="text" class="form-control" id = "fromID" name="fromEmail" value="<%=fromEmail%>" onkeydown="return backKeyCode(event)" readonly>
+        </div>
+
+        <div class="form-group">
+          <label for="qtyID"><%= i18n.sendAsset_qtyID%></label>
+          <input type="text" class="form-control" id = "qtyID" name="" value="<%=qty%>" onkeydown="return backKeyCode(event)" readonly>
+        </div>
+
+        <div class="form-group">
+          <label for="toID"><%= i18n.sendAsset_toID%></label><span style="color:red"> *</span> <!--- add 'required' by leepg --->
+          <input type="text" class="form-control" id = "toEmail" name="toEmail" value="" required>
+        </div>
+
+        <div class="form-group">
+          <label for="amountID"><%= i18n.sendAsset_amountID%><span style="color:red"> *</span></label> <!--- add 'required' by leepg --->
+          <input type="number"  pattern="[0-9]*" inputmode="numeric" class="form-control" id = "amountID" name="amount" value="" onkeydown="return showKeyCode(event)" required>
+          <span id="amountID"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="memoID"><%= i18n.sendAsset_memoID%></label> <!--- add 'required' by leepg --->
+          <input type="text" class="form-control" id = "memoID" name="memo" value="">
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success pull-right asset"><%= i18n.sendAsset_btn_comfirm%></button>
+			      <text class="pull-right">&nbsp&nbsp&nbsp&nbsp</text>
+            <button type="button" class="btn btn-default pull-right asset" href="location.href='/'"><%= i18n.sendAsset_btn_cancel%></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

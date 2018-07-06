@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../common/bootstrap.ejs %>
+    <title></title>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.16/b-1.5.1/b-colvis-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/datatables.min.css"/>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.16/b-1.5.1/b-colvis-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/datatables.min.js"></script>
+    <script type="text/javascript" src="../helpers/ledgerradio.js">
+
+    </script>
+
+  </head>
+  <body>
+    <% include ../common/header.ejs %>
+    <div class="container">
+      <div class="row">
+        <div class="">
+          <label class="radio-inline"><input type="radio" name="ledgershow" value="all">전체</label>
+          <label class="radio-inline"><input type="radio" name="ledgershow" value="deposit">입금</label>
+          <label class="radio-inline"><input type="radio" name="ledgershow" value="withdrawal">출금</label>
+        </div>
+        <table data-order='[[0,"desc"]]' id="ledger" class="table table-striped">
+          <thead>
+            <tr>
+              <th class="text-left"><%= i18n.ledger_time%></th>
+              <th class="text-center"><%= i18n.ledger_description%></th>
+              <th class="text-center"><%= i18n.ledger_depositor%></th>
+              <th class="text-center"><%= i18n.ledger_deposit%></th>
+              <th class="text-center"><%= i18n.ledger_withdrawal%></th>
+              <th class="text-center"><%= i18n.ledger_memo%></th>
+              <th class="text-right"><%= i18n.ledger_balance%></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% var count = 0%>
+            <% for(var index in data){ %>
+              <tr>
+
+                <td class="text-left"><%=data[index]['date']%></td>
+                <td class="text-center"><%=data[index]['description']%></td>
+                <td class="text-center"><%=data[index]['to']%></td>
+                <td id="inputComma<%=count%>" class="text-center deposit"><%=data[index]['input']%></td>
+                <td id="outputComma<%=count%>" class="text-center withdrawal"><%=data[index]['output']%></td>
+                <td class="text-center"><%=data[index]['memo']%></td>
+                <td id="balanceComma<%=count%>" class="text-right"><%=data[index]['balance']%></td>
+                <% count++%>
+              </tr>
+            <%}%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+      var recordCount = $('#ledger').children('tbody').children('tr').length;
+
+      for(var index=0; index<recordCount; index++){
+        var input = $('#inputComma'+index).html();
+        var output = $('#outputComma' +index).html();
+        var balance = $('#balanceComma' +index).html();
+
+        var inputC = input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var outputC = output.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var balanceC = balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        $('#inputComma'+index).html(inputC);
+        $('#outputComma' +index).html(outputC);
+        $('#balanceComma' +index).html(balanceC);
+      }
+
+      var table = $('#ledger').DataTable({
+        dom: 'Blfrtip',
+        lengthMenu : [
+          [10, 25, 50, -1],
+          ['10 rows', '25 rows', '50 rows', 'Show all']
+        ],
+        buttons: [
+          'excel'
+        ]
+      });
+
+      $('input[type=radio][name=ledgershow]').change(function(){
+        if($('input[type=radio][name=ledgershow]:checked').val() == "all"){
+          table.column(3).search('').draw();
+          table.column(4).search('').draw();
+          table.data().draw();
+        }
+        if($('input[type=radio][name=ledgershow]:checked').val() == "deposit"){
+          table.column(4).search('').draw();
+          table.column(3).search('[0-9]',true,true).draw();
+        }
+        if($('input[type=radio][name=ledgershow]:checked').val() == "withdrawal"){
+          table.column(3).search('').draw();
+          table.column(4).search('[0-9]',true,true).draw();
+        }
+      });
+    });
+    </script>
+  </body>
+</html>

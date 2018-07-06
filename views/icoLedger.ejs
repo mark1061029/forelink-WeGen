@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../common/bootstrap.ejs %>
+    <title></title>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+
+    <script type="text/javascript">
+      function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+    </script>
+
+  </head>
+  <body>
+    <% include ../common/header.ejs %>
+    <div class="container">
+      <h2><%= i18n.ledger_subtitle%> / <%=thisuser%></h2>
+      <div class="row">
+        <table id="ledger" class="table table-striped">
+          <thead>
+            <tr>
+              <th class="text-left"><%= i18n.icoLedger_timeStamp%></th>
+              <th class="text-center"><%= i18n.icoLedger_userId%></th>
+              <th class="text-center"><%= i18n.icoLedger_ethCoin%></th>
+              <th class="text-center"><%= i18n.icoLedger_cgmCoin%></th>
+              <th class="text-center"><%= i18n.icoLedger_icoType%></th>
+              <th class="text-right"><%= i18n.icoLedger_cgmAddr%></th>
+              <th class="text-right"><%= i18n.icoLedger_ethAddr%></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(var index in result){ %>
+              <tr>
+                <td class="text-left"><%=data[index]['timeStamp']%></td>
+                <td class="text-center"><%=data[index]['userId']%></td>
+                <td class="text-center">comma(<%=data[index]['ethCoin']%>)</td>
+                <td class="text-center">comma(<%=data[index]['cgmCoin']%>)</td>
+                <td class="text-center"><%=data[index]['icoType']%></td>
+                <td class="text-right"><%=data[index]['cgmAddr']%></td>
+                <td class="text-right"><%=data[index]['ethAddr']%></td>
+              </tr>
+            <%}%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $('#ledger').DataTable();
+      dom: 'Blfrtip',
+      lengthMenu : [
+        [10, 25, 50, -1],
+        ['10 rows', '25 rows', '50 rows', 'Show all']
+      ],
+      buttons: [
+        'excel'
+      ]
+    });
+    </script>
+  </body>
+</html>

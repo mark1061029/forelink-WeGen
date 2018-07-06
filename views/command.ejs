@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ../common/bootstrap.ejs %>
+    <link rel="shortcut icon" href="images/ofavicon.ico" />
+    <title></title>
+  </head>
+  <body>
+    <div class="">
+      <%- include ../common/header.ejs %>
+    </div>
+
+    <div class="">
+      <table>
+        <% for(var key in command){%>
+          <tr>
+            <td>command : </td>
+            <td><%= key%></td>
+          </tr>
+        <%} %>
+      </table>
+    </div>
+  </body>
+</html>

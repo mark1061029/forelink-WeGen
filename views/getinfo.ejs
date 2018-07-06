@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ../common/bootstrap.ejs %>
+    <title></title>
+  </head>
+  <body>
+    <div class="">
+      <%- include ../common/header.ejs %>
+    </div>
+
+    <div class="">
+      <table>
+        <% for(var key in infos){%>
+          <tr>
+            <td><%= key%></td>
+            <td><%= infos[key]%></td>
+          </tr>
+        <%} %>
+      </table>
+    </div>
+  </body>
+</html>

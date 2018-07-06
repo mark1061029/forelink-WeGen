@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= i18n.ico_title%></title>
+
+    <%- include ../common/bootstrap.ejs %>
+
+    <style>
+    p.blacktext-4:after {
+       content: "";
+       display: block;
+       width: 1140px;
+       border-bottom: 1px solid #EAEAEA;
+       margin: 30px 0px;
+     }
+
+    p{
+      font-size: 20px;
+      line-height: 26px;
+      text-align: left;
+    }
+
+    .copyfrom {
+        position : absolute;
+        left : -9999px;
+        background-color: black;
+        font-style: black;
+    }
+
+    input[type=text]{
+      color: black;
+      text-decoration: none;
+    }
+
+    i {
+      position: relative;
+      top:7px;
+      width: 30px;
+      height: 30px;
+    }
+    </style>
+
+    <script>
+    function backKeyCode(event) {
+      event = event || window.event;
+      var keyID = (event.which) ? event.which : event.keyCode;
+      if( keyID === 8 )
+      {
+        return false;
+      }
+    }
+    </script>
+
+  </head>
+  <body>
+
+    <%- include ../common/header.ejs %>
+
+    <section class="section" data-stellar-background-ratio="0.2">
+      <div class="container">
+  			<div class="row mt-3">
+  				<div class="col-md-12">
+  					<div class="featured-boxes">
+  						<div class="row">
+  							<div class="col-lg-12 col-md-12">
+                  <div class="row">
+                    <h3>WeGen 토큰은 이더리움으로 구매 가능합니다.</h3>
+                    <h4 class="blacktext-4">구매하고자 하는 수량만큼 이더리움을 MyEtherWallet 같은 사이트에서 입금해주세요.<br><br>예, 1 ETH만큼 WeGen을 구매하는 경우. <br>WeGen 교환율이 1:100이면, 1 ETH를 입금하게 되면, 100 WeGen을 구매하게 됩니다.</h4><br>
+                    <div class="row">
+                    <div class="col-md-12 mb-2">
+                      <p><i class="material-icons" style="font-size:30px;" vertical-align="text-bottom;">looks_one</i><%= i18n.ico_msg1%></p>
+                      <p class="blacktext-4"><span style="font-size:1.8rem;"><%= i18n.ico_msg1_1%><%=rate%><%= i18n.ico_msg1_1_1%>
+                      </br><%= i18n.ico_msg1_2%><%=minAccount%> ~ <%=maxAccount%><%= i18n.ico_msg1_3%></span></p>
+                    </div>
+                    </div>
+                  </div>
+                  <div class="row">
+  									<div class="box-content">
+  										<form name="frmWallet" action="/icoParticipate" id="frmWallet" method="post">
+    										<div class="row">
+    											<div class="col-md-12">
+    												<p class="font-weight-bold"><i class="material-icons" style="font-size:30px;" vertical-align="text-bottom;">looks_two</i><%= i18n.ico_msg2%></p>
+    											</div>
+                          <div class="col-md-9">
+                            <% if(userEthAddr === undefined){ %>
+                               <input id="wallet" type="text" name="wallet" class="form-control">
+                            <% }else{ %>
+                               <input id="wallet" type="text" name="wallet" class="form-control" value="<%=userEthAddr%>">
+                            <% } %>
+                          </div>
+    											<div class="col-md-3">
+                            <button type="submit" name="button" class="btn btn-primary btn-block mb-lg"><%= i18n.ico_btn_input%></button>
+    											</div>
+    											<div class="col-md-12">
+    												<p class="blacktext-4"><span style="font-size:1.8rem;"><%= i18n.ico_msg3_1%></span>
+                              <br><span style="font-size:1.8rem;"><%= i18n.ico_msg3_2%></span></p>
+    											</div>
+    										</div>
+  										</form>
+  										<div class="row">
+  											<div class="col-md-12">
+  												<p class="font-weight-bold"><i class="material-icons" style="font-size:30px;" vertical-align="text-bottom;">looks_3</i><%= i18n.ico_msg4%></p>
+  											</div>
+                        <div class="col-md-9">
+                        <input id="wallet" type="text" readonly class="form-control" value="<%=ethAddr%>" onkeydown="return backKeyCode(event)">
+  											</div>
+                        <div class="col-md-3">
+  												<style>
+  										            .copyfrom {
+  										                position : absolute;
+  										                left : -9999px;
+                                      background-color: black;
+                                      font-style: black;
+  										            }
+
+  										        </style>
+  										        <script type="text/javascript">
+  										        	function copyAddress(){
+  									                	var input = document.querySelector("input.copyfrom");
+  									                	input.select();
+                                      console.log("input :" + input);
+  									                	document.execCommand("copy");
+  									                	alert("<%= i18n.ico_alert_copy%>");
+  									            	}
+  										        </script>
+  												<input class="copyfrom" tabindex="-1" aria-hidden="true"  value="<%=ethAddr%>">
+  												<a id="clipboad" class="btn btn-primary btn-block mb-lg" data-clipboard-target="#wallet" onclick="javascript:copyAddress();"><%= i18n.ico_btn_copy%></a>
+  											</div>
+
+  											<div class="col-md-12">
+  												<p class="blacktext-4"><%= i18n.ico_msg5%><a target="_blank" href="https://www.myetherwallet.com"><%= i18n.ico_msg5_1%></a><%= i18n.ico_msg5_2%></p>
+                        </br>
+                        </div>
+
+                        <div class="col-md-12">
+                          <p class="font-weight-bold"><i class="material-icons" style="font-size:30px;" vertical-align="text-bottom;">looks_4</i><%= i18n.ico_msg6%><a target="_blank" href="https://www.myetherwallet.com"><%= i18n.ico_msg6_1%></a><%= i18n.ico_msg6_2%></p>
+  												<p><span style="color:red; font-size:2rem;"><%= i18n.ico_msg7%></span></p>
+  												<img src="img/buy/gas-change.jpg" class="img-fluid" alt="gas-change">
+                          <p class="blacktext-4"></p>
+  											</div>
+                      </br>
+  										</div>
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p class="font-weight-bold"><i class="material-icons" style="font-size:30px;" vertical-align="text-bottom;">looks_5</i><%= i18n.ico_msg8%><a target="_blank" href="https://www.myetherwallet.com"><%= i18n.ico_msg8_1%></a><%= i18n.ico_msg8_2%></p>
+                        </div>
+                        <div class="col-md-3">
+  												<a href="https://etherscan.io/address/<%=userEthAddr%>" target="_blank" class="btn btn-primary btn-block mb-lg" value="write"><%= i18n.ico_btn_scan%></a>
+                          </br>
+                        </div>
+                        <div class="col-md-12">
+                        <p class="blacktext-4"></p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p class="font-weight-bold"><i class="material-icons" style="font-size:30px;" vertical-align="text-bottom;">looks_6</i><%= i18n.ico_msg9%></p>
+                        </div>
+                        <!-- <div class="col-md-9">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <p class="font-weight-bold"><%= i18n.ico_msg10%><span>0.0</span><%= i18n.ico_msg10_1%></p>
+                            </div>
+                            <div class="col-md-6">
+                              <p class="font-weight-bold"><%= i18n.ico_msg11%><span>0.0</span><%= i18n.ico_msg11_1%></p>
+                            </div>
+                          </div>
+                        </div> -->
+                        <div class="col-md-12">
+                          <p><span style="font-size:2rem;"><%= i18n.ico_msg12%><a href="/myWallet/userId"><%= i18n.ico_msg12_1%></a><%= i18n.ico_msg12_2%><a href="/ledger/userId"><%= i18n.ico_msg12_3%></a><%= i18n.ico_msg12_4%></span></p>
+                        </div>
+                        <div class="col-md-12">
+                        <p class="blacktext-4"></p>
+                        </div>
+                      </div>
+
+
+                    </div>
+  								</div>
+  						  </div>
+             </div>
+  					</div>
+  				</div>
+  			</div>
+      </div>
+  	</section>
+
+    <%- include ../common/index-js.ejs %>
+
+  </body>
+  </html>

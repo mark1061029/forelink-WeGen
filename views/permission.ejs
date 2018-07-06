@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ../common/bootstrap.ejs %>
+    <title></title>
+  </head>
+  <body>
+    <div class="">
+        <%- include ../common/header.ejs %>
+    </div>
+    <div class="">
+      <table>
+        <tr>
+          <td><%= i18n.permissoion_Address%></td>
+          <td><%= i18n.permissoion_Permission%></td>
+        </tr>
+
+        <% for(var key in addr){ %>
+          <% var addrTag = addr[key]%>
+          <tr>
+            <td>
+              <%= addrTag%>
+            </td>
+            <td>
+              <% for(var index in permissions){ %>
+                <% if(addrTag == permissions[index]['address']){ %>
+                  <%= permissions[index]['type']%>
+                <% }else{} %>
+              <% } %>
+            </td>
+            <td><a href="/permissions/<%=addrTag%>"><%= i18n.permission_label1%></a></td>
+          </tr>
+        <% } %>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ../common/bootstrap.ejs %>
+    <title></title>
+  </head>
+  <body>
+    <div class="">
+      <%- include ../common/header.ejs %>
+    </div>
+    <div class="container">
+      <form class="form-signin" action="/findId" method="post">
+        <h2 class="form-signin-heading"><%= i18n.findId_labal_findID%></h2>
+        <label for="inputName" class="sr-only"><%= i18n.findId_labal_name%></label>
+        <input type="text" id="inputName" name="name" class="form-control" placeholder="이름" value="" required autofocus ><br>
+        <label for="inputEmail" class="sr-only"><%= i18n.findId_labal_email%></label>
+        <input type="text" id="inputEmail" name="email" class="form-control" placeholder="이메일" value="" required><br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="button"><%= i18n.findId_btn_findID%></button>
+      </form>
+      <div class="row">
+  			<div class="col-lg-6 col-md-6">
+          <div class="text-left" style="font-size: 2rem">
+            <a href="/login">로그인</a>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <div class="text-right" style="font-size: 2rem">
+            <a href="/findId"><%= i18n.findPwd_link_findID%></a>
+            <a href="/findPwd"><%= i18n.findPwd_link_findPwd%></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

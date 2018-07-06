@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ../common/bootstrap.ejs %>
+    <title></title>
+  </head>
+  <body>
+    <%- include ../common/header.ejs %>
+    <div class="container">
+      <h2><%= i18n.deleteConfirm_subtitlel%></h2>
+      <hr>
+      <!--
+      <h2>어떤 점이 불편하셨나요 ?</h2>
+      <p><b>나눔코인을 이용하면서 불편했던 점을 말씀해 주시면 서비스 개선에 참고하도록 하겠습니다.</b></p>
+      <p>탈퇴 사유는 무엇인가요 ?</p>
+      <br>
+      --->
+      <h3><%= i18n.deleteConfirm_msg1%></h3>
+      <p><b><%= i18n.deleteConfirm_msg2%></b></p>
+      <p><%= i18n.deleteConfirm_msg3%></p>
+      <p><%= i18n.deleteConfirm_msg4%></p>
+      <p><%= i18n.deleteConfirm_msg5%></p>
+      <br>
+      <p><b><%= i18n.deleteConfirm_msg6%></b></p>
+      <p><%= i18n.deleteConfirm_msg7%></p>
+      <p><%= i18n.deleteConfirm_msg8%></p>
+      <hr>
+      <h2><%= i18n.deleteConfirm_msg9%></h2>
+      <p><%= i18n.deleteConfirm_msg10%></p>
+
+      <form class="" action="/unsubscribe" method="post">
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <a class="btn btn-success pull-right" href="/delete/<%=userAddr%>"><%= i18n.deleteConfirm_btn_Withdrawal%></a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

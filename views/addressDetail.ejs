@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ../common/bootstrap.ejs %>
+    <link rel="shortcut icon" href="images/ofavicon.ico" />
+    <title></title>
+
+    <script type="text/javascript">
+      function check(){
+
+        var password = document.getElementById("pw").value;
+        var passwordCheck = document.getElementById("pwcheck").value;
+        var email = document.getElementById("email").value;
+        var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+
+        if(exptext.test(email)==false){
+  		  	//이메일 형식이 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식이 아닐경우
+          console.log('이메일체크');
+          swal({
+             title: "Check your Email plz!",
+             width: '40rem',
+             text: "",
+             type: "error",
+             confirmButtonText: "확인"
+           });
+    			document.addjoin.email.focus();
+    			return false;
+        }
+        if(password != passwordCheck){
+          console.log('비밀번호체크');
+          swal({
+             title: "PASSWORD Check plz!",
+             width: '40rem',
+             text: "",
+             type: "error",
+             confirmButtonText: "확인"
+           });
+          return false;
+        }
+        else{
+          document.getElementById('formData').submit();
+          }
+        }
+
+       function onLoad() { }
+    </script>
+    <script>
+    function backKeyCode(event) {
+      event = event || window.event;
+      var keyID = (event.which) ? event.which : event.keyCode;
+      if( keyID === 8 )
+      {
+        return false;
+      }
+    }
+    </script>
+  </head>
+  <body onload="onLoad()">
+    <%- include ../common/header.ejs %>
+    <div class="container">
+      <form id="formData" class="" action="/addressUpdate" method="post">
+        <div class="form-group">
+          <label for="email"><%= i18n.addrDetail_label6%></label><span style="color:red"> *</span> <!--이메일-->
+          <input type="email" class="form-control" placeholder="<%=email%>" name="email" value="<%=email%>" id="email" required>
+        </div>
+
+        <!--CGM 신규 추가-->
+        <div class="form-group">
+          <label for="ethAddr"><%= i18n.addrDetail_label12%></label><!-- 이더리움 주소-->
+          <input type="text" class="form-control" placeholder="<%=ethAddr%>" name="ethAddr" value="<%=ethAddr%>">
+        </div>
+
+        <div class="form-group">
+          <label for="ethAddr"><%= i18n.addrDetail_label13%></label><!-- CGM코인 주소-->
+          <input type="text" class="form-control" placeholder="<%=multiAddr%>" name="multiAddr" value="<%=multiAddr%>" readOnly>
+        </div>
+        <!-- -->
+
+        <div class="form-group"> <!--- added by leepg for password update --->
+          <label for="pwd"><%= i18n.addrDetail_label2%></label> <!--비밀번호-->
+          <% if(isAdmin == true){ %>
+          <input type="password" class="form-control" placeholder="**********" name="pwd" value="" id="pw"><br>
+          <% }else{ %>
+          <input type="password" class="form-control" placeholder="********** &nbsp&nbsp&nbsp ; <%= i18n.addrDetail_msg1%>" name="pwd" value="" id="pw"
+                  pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&_\-+=~.])[A-Za-z\d$@$!%*#?&_\-+=~.]{10,}$" ><br> <!--변경하려면 영문자, 숫자, 특수문자 포함 10자 이상 입력-->
+          <% } %>
+        </div>
+
+        <div class="form-group"> <!--- added by leepg for password update --->
+          <label for="pwd2"><%= i18n.addrDetail_label3%></label> <!--비밀번호 확인-->
+          <input type="password" class="form-control" placeholder="**********" name="pwd2" value="" id="pwcheck">
+        </div>
+
+        <div class="form-group">
+          <label for="name"><%= i18n.addrDetail_label5%></label> <!--이름-->
+          <% if(isAdmin == true){ %> <!--- see res.render('main', ...) and header.ejs --->
+            <input type="text" class="form-control" placeholder="<%=name%>" name="name" value="<%=name%>" readonly>
+          <% }else{ %>
+            <input type="text" class="form-control" placeholder="<%=name%>" name="name" value="<%=name%>">
+          <% } %>
+        </div>
+
+        <div class="form-group">
+          <label for="phone"><%= i18n.addrDetail_label7%></label> <!--전화번호--> <!--- tel is supported only safari --->
+          <input type="tel" class="form-control" placeholder="<%=phone%>" name="phone" value="<%=phone%>">
+        </div>
+
+        <div class="form-group">
+          <label for=""><%= i18n.addrDetail_label8%></label><br> <!--이메일 알림-->
+          <input type="checkbox" name="rxnoti" value="true" <%if(rxnoti == true){%> checked="true" <%}%>>
+          <label for="checkbox-inline"><%= i18n.addrDetail_label9%></label> <!--입금 시-->
+          &nbsp&nbsp&nbsp
+          <input type="checkbox" name="txnoti" value="true" <%if(txnoti == true){%> checked="true" <%}%>>
+          <label for="checkbox-inline"><%= i18n.addrDetail_label10%></label> <!--송금 시-->
+          <% if(isAdmin == true){ %>
+          &nbsp&nbsp&nbsp
+          <input type="checkbox" name="issuenoti" value="true" <%if(issuenoti == true){%> checked="true" <%}%>>
+          <label for="checkbox-inline"><%= i18n.addrDetail_label11%></label> <!--화폐 발행 시-->
+          <% } %>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <% if(isAdmin == true){ %>
+            <a class="btn btn-success pull-right" href="/deleteConfirm/<%=id%>"><%= i18n.addrDetail_btn1%></a>
+            <text class="pull-right">&nbsp&nbsp&nbsp&nbsp</text>
+            <% } %>
+            <button type="button" class="btn btn-success pull-right asset" onclick="check()"><%= i18n.addrDetail_btn2%></button> <!--변 경-->
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </body>
+</html>

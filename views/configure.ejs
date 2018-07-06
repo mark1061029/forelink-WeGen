@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="images/ofavicon.ico" />
+    <title></title>
+
+    <%- include ../common/bootstrap.ejs %>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script type='text/javascript' src='//code.jquery.com/jquery-1.8.3.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+    <!--
+    <script type='text/javascript'>
+    $(function($){
+      $.fn.datepicker.dates['kr'] = {
+        days: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"],
+        daysShort: ["일", "월", "화", "수", "목", "금", "토", "일"],
+        daysMin: ["일", "월", "화", "수", "목", "금", "토", "일"],
+        months: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+        monthsShort: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
+      };
+    }(jQuery));
+
+    $(function(){
+        $('.input-group.date').datepicker({
+            calendarWeeks: false,
+            todayHighlight: true,
+            autoclose: true,
+            format: "yyyy/MM/dd HH:mm",
+            language: "kr"
+        });
+    });
+    </script>
+  -->
+
+  <script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker({
+          format : 'YYYY-MM-DD HH:mm'
+        });
+    });
+    $(function () {
+        $('#datetimepicker2').datetimepicker({
+          format : 'YYYY-MM-DD HH:mm'
+        });
+    });
+    $(function () {
+        $('#datetimepicker3').datetimepicker({
+          format : 'YYYY-MM-DD HH:mm'
+        });
+    });
+  </script>
+
+  </head>
+  <body>
+    <div class="">
+        <%- include ../common/header.ejs %>
+    </div>
+    <div class="container">
+      <form class="" action="/configure" method="post">
+
+        <h3>Landing Page Setting</h3>
+
+        <div class="form-group">
+          <label for="icoTag">ICO Type</label> <!--아이디-->
+          <input type="text" class="form-control" placeholder="" name="icoType" value="<%=icoType%>">
+          <!--- disabled -> readonly: changed by leepg for real user in case of admin update --->
+        </div>
+
+        <div class="form-group">
+          <label for="datePicker">Start-Time</label>
+
+          <div class="input-group date" id="datetimepicker1">
+            <input type="text" name="startTime" class="form-control" value="<%=startTime%>"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <label for="datePicker2">End-Time</label>
+          <div class="input-group date" id="datetimepicker2">
+            <input type="text" name="endTime" class="form-control" value="<%=endTime%>"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="">ICO 목표</label>
+          <input type="number" class="form-control" placeholder="" name="icoCount" value="<%=icoCount%>">
+        </div>
+
+        <div class="form-group">
+          <label for="ExchangeRate">Exchange Rate</label>
+          <input type="number" class="form-control" placeholder="1 Ethereum per WeGen"  name="rate" value="<%=rate%>">
+        </div>
+
+        <div class="form-group">
+          <label for="minMoney">최소금액</label>
+          <input type="number" class="form-control" placeholder=""  name="minAccount" value="<%=minAccount%>">
+        </div>
+
+        <div class="form-group">
+          <label for="maxMoney">최대금액</label>
+          <input type="number" class="form-control" placeholder=""  name="maxAccount" value="<%=maxAccount%>">
+        </div>
+
+        <h3>ICO Setting</h3>
+
+        <div class="form-group">
+          <label for="apikey">Ehterscan API Key</label>
+          <input type="text" class="form-control" placeholder="" name="apiKey" value="<%=apiKey%>">
+        </div>
+
+        <div class="form-group">
+          <label for="EthAddr">Ethereum Address</label>
+          <input type="text" class="form-control" placeholder="" name="ethAddr" value="<%=ethAddr%>">
+        </div>
+
+        <div class="form-group">
+          <label for="location">Reservation Location</label>
+          <input type="text" class="form-control" placeholder="" name="location" value="<%=location%>">
+        </div>
+
+        <div class="form-group">
+          <label for="datePicker2">Effect-Time</label>
+          <div class="input-group date" id="datetimepicker3">
+            <input type="text" name="effectDate" class="form-control" value="<%=effectDate%>"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+          </div>
+        </div>
+
+        <h3>Admin Setting</h3>
+
+        <div class="form-group">
+          <label for="DeskEmail">Help desk Email</label>
+          <input type="text" class="form-control" placeholder="" name="deskemail" value="<%=deskemail%>">
+        </div>
+
+        <div class="form-group">
+          <label for="testMode">TestMode</label>
+          <input type="checkbox" name="testMode" value="true" <% if(testMode == true){%> checked="true" <% } %> >
+        </div>
+
+        <div class="form-group">
+          <label for="reCaptcha">reCaptcha</label>
+          <input type="checkbox" name="reCaptcha" value="true" <% if(reCaptcha == true){%> checked="true" <% } %> >
+        </div>
+
+        <div class="form-group">
+          <label for="SMSSend">SMS미발송</label>
+          <input type="checkbox" name="SMSSend" value="true" <% if(SMSSend == true){%> checked="true" <% } %> >
+        </div>
+
+        <button type="submit" class="btn btn-success pull-right asset">변경</button> <!--변 경-->
+
+      </form>
+    </div>
+  </body>
+</html>

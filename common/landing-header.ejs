@@ -1,0 +1,92 @@
+<header id="hero-area" data-stellar-background-ratio="0.5">
+  <nav class="navbar navbar-expand-lg fixed-top scrolling-navbar indigo">
+    <div class="container">
+      <div class="navbar-header">
+        <a href="/" class="navbar-brand"><img class="img-fulid" src="img/logo.png" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="lnr lnr-menu"></i>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="main-navbar">
+        <ul class="navbar-nav mr-auto w-100 justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href="/#Home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href="/#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href="/#features">CGM</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href="/#roadmap">Roadmap</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href="/#pricing">ICO</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href="/#team">Team</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav mr-auto w-100 justify-content-end">
+          <% if(!user){ %>
+            <li class="nav-item"><a class="nav-link page-scroll" href="/login">Login</a></li>
+            <li class="nav-item"><a class="nav-link page-scroll" href="/signup">Join</a></li>
+          <% }else{ %>
+            <li class="nav-item"><a class="nav-link page-scroll" href="/addressDetail">계좌 확인</a></li>
+            <li class="nav-item"><a class="nav-link page-scroll" href="/logout">로그아웃</a></li>
+          <% } %>
+        </ul>
+        <ul class="navbar-nav w-25 justify-content-end">
+          <li class="nav-item dropdown">
+              <a href="nav-link page-scroll dropdown-toggle" data-toggle="dropdown" href="#">언어
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a class="<%=(lang=="kor"?"active":"")%>" href="/?clang=kor">한국어</a></li>
+                <li><a class="<%=(lang=="en"?"active":"")%>" href="/?clang=en">English</a></li>
+              </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <ul class="mobile-menu">
+       <li>
+          <a class="page-scroll" href="/#hero-area">Home</a>
+        </li>
+        <li>
+          <a class="page-scroll" href="/#about">About</a>
+        </li>
+        <li>
+          <a class="page-scroll" href="/#features">CGM</a>
+        </li>
+        <li>
+          <a class="page-scroll" href="/#roadmap">Roadmap</a>
+        </li>
+        <li>
+          <a class="page-scroll" href="/#pricing">ICO</a>
+        </li>
+        <li>
+          <a class="page-scroll" href="/#team">Team</a>
+        </li>
+
+        <% if(!user){ %>
+          <li><a class="page-scroll" href="/login">Login</a></li>
+          <li><a class="page-scroll" href="/signup">Join</a></li>
+        <% }else{ %>
+          <li><a class="page-scroll" href="/addressDetail">계좌 확인</a></li>
+          <li><a class="page-scroll" href="/logout">로그아웃</a></li>
+        <% } %>
+        </ul>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-md-10">
+        <div class="contents2 text-center">
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

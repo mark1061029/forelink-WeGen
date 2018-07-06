@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta property="og:title" content="코인25 사전예약"/>
+    <meta property="og:url" content="https://www.coin25.co"/>
+    <meta property="og:image" content="https://www.coin25.co/images/coin25_og_img.png"/>
+    <meta property="og:description" content="코인25 사전예약"/>
+    <link rel="shortcut icon" href="css/reserva/images/ofavicon.ico">
+    <title>코인25 사전예약</title>
+    <link rel="stylesheet" href="css/reserva/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://jsgetip.appspot.com"></script> <!-- ip주소 받는 API -->
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="css/reserva/assets/js/ie-emulation-modes-warning.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Custom styles for this template -->
+    <link href="css/reserva/css/carousel.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/reserva/css/bootstrap.min.css">
+    <script src="css/reserva/css/jquery-1.11.1.min.js"></script>
+  	<script src="css/reserva/css/jquery-ui.min.js"></script>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+</head>
+<script>
+  $(document).ready(function(){
+
+     var count = <%=subscriber%>;
+     var digit = count.toString();
+
+     console.log("digit:" + digit);
+     console.log("digit.length:" + digit.length);
+
+  	var diff = 7 - digit.length  + 1;
+
+  	for(i=0; i < diff; i++) {
+  		$("#digit"+ i).text(0);
+  	}
+
+  	for(i=0; i < digit.length; i++) {
+  		var index = i+diff;
+  		$("#digit"+index).text(digit[i]);
+  		//console.log("#digit"+ index, digit[i]);
+  	}
+
+  });
+
+
+  function onlyNumber(event){
+  	event = event || window.event;
+  	var keyID = (event.which) ? event.which : event.keyCode;
+  	if ( (keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105) || keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 )
+  		return;
+  	else
+  		return false;
+  }
+  function removeChar(event) {
+  	event = event || window.event;
+  	var keyID = (event.which) ? event.which : event.keyCode;
+  	if ( keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 )
+  		return;
+  	else
+  		event.target.value = event.target.value.replace(/[^0-9]/g, "");
+  }
+
+  var randomNum = {};
+  //0~9까지의 난수
+  randomNum.random = function(n1, n2) {
+      return parseInt(Math.random() * (n2 -n1 +1)) + n1;
+  };
+  //인증번호를 뽑을 난수 입력 n 5이면 5자리
+  randomNum.authNo= function(n) {
+      var value = "";
+      for(var i=0; i<n; i++){
+          value += randomNum.random(0,9);
+      }
+      return value;
+  };
+  //화면에 번호 출력
+  randomNum.printRandom =function(data,num) {
+      document.getElementById(data).innerHTML = randomNum.authNo(num);
+  };
+
+  randomNum.alertNo = function(n) {
+    var certi = randomNum.authNo(n);
+    certi3 = certi2;
+    alert(certi);
+    console.log("certi : " + certi);
+  }
+</script>
+<body>
+    <div id="visual" style="background : grey">
+        <div class="container">
+            <div class="tit"> <img src="css/reserva/images/main_tit.png" alt="tit"> </div>
+            <div class="count">
+              <div class="counter">
+                  <img src="css/reserva/images/counter_1.png" alt=""><span class="sp_text"><span id="digit1"></span></span>
+              </div>
+              <div class="counter">
+                  <img src="css/reserva/images/counter_1.png" alt=""><span class="sp_text"><span id="digit2"></span></span>
+              </div>
+              <div class="counter">
+                  <img src="css/reserva/images/counter_1.png" alt=""><span class="sp_text"><span id="digit3"></span></span>
+              </div>
+              <div class="counter">
+                  <img src="css/reserva/images/counter_1.png" alt=""><span class="sp_text"><span id="digit4"></span></span>
+              </div>
+              <div class="counter">
+                  <img src="css/reserva/images/counter_1.png" alt=""><span class="sp_text"><span id="digit5"></span></span>
+              </div>
+              <div class="counter">
+                  <img src="css/reserva/images/counter_1.png" alt=""><span class="sp_text"><span id="digit6"></span></span>
+              </div>
+              <div class="counter">
+                  <img src="css/reserva/images/counter_1.png" alt=""><span class="sp_text"><span id="digit7"></span></span>
+              </div>
+            </div>
+            <div class="counter_text">
+                <p>현재 <strong style="color: #000;"><%=subscriber%></strong> 명이 사전예약을 하셨습니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="contents1">
+        <div class="container">
+            <div class="inner">
+                <div class="inner_l"> <img src="css/reserva/images/coin25is.png" alt="코인25는">
+                    <p class="text">다양한 암호화폐를 개인간(P2P) 거래할 수 있는</p>
+                    <p class="text2"><strong>가장 안전한 중개 플랫폼</strong>입니다.</p>
+                    <ul>
+                        <li><img src="css/reserva/images/list_icon.png" alt=""> 개인간 암호화폐 중개 거래</li>
+                        <li><img src="css/reserva/images/list_icon.png" alt=""> 에스크로 기능으로 안전한 거래 보장</li>
+                        <li><img src="css/reserva/images/list_icon.png" alt=""> 철저한 거래자 개인정보 보호</li>
+                    </ul>
+                </div>
+                <div class="inner_r"> <img src="css/reserva/images/phone_07.png" alt=""> </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container marketing">
+        <div class="tit_wrap">
+            <p class="tit">안전하고 믿을 수 있는 거래소를 찾고 계셨나요?</p>
+        </div>
+        <!-- Three columns of text below the carousel -->
+        <div class="row">
+            <div class="col-lg-4"> <img class="img-circle" src="css/reserva/images/icon_01.png" alt="Generic placeholder image" width="50%" height="50%">
+                <h2 style="font-size: 20px;">매도/매수 등록,검색,매칭,<br/>경매방식 거래 제공</h2> </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-4"> <img class="img-circle" src="css/reserva/images/icon_02.png" alt="Generic placeholder image" width="50%" height="50%">
+                <h2 style="font-size: 20px;">에스크로 기능을 통한<br/>거래대금 보호</h2> </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-4"> <img class="img-circle" src="css/reserva/images/icon_03.png" alt="Generic placeholder image" width="50%" height="50%">
+                <h2 style="font-size: 20px;">거래소 암호화폐 등록 및<br/>시세동향 정보제공</h2> </div>
+            <!-- /.col-lg-4 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-4"> <img class="img-circle" src="css/reserva/images/icon_04.png" alt="Generic placeholder image" width="50%" height="50%">
+                <h2 style="font-size: 20px;">거래실적 및 평판 제공으로<br/>상대방에 대한 신뢰성 판단</h2> </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-4"> <img class="img-circle" src="css/reserva/images/icon_05.png" alt="Generic placeholder image" width="50%" height="50%">
+                <h2 style="font-size: 20px;">다양한 광고신청, 등록,<br/>승인, 게재 및 제휴</h2> </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-4"> <img class="img-circle" src="css/reserva/images/icon_06.png" alt="Generic placeholder image" width="50%" height="50%">
+                <h2 style="font-size: 20px;">거래 진행에 따른<br/>스마트한 알림기능</h2> </div>
+            <!-- /.col-lg-4 -->
+        </div>
+        <!-- /.row -->
+    </div>
+
+
+
+    <!-- event1 -->
+    <div id="event1" style="background : #FF5E00">
+        <div class="container">
+            <div class="tit"> <img src="css/reserva/images/event_01.png" alt="">
+                <p class="p1" style="font-weight: bold">100%보상!</p>
+                <p class="p2">사전예약 후 오픈 시, 예약자에 한해 엄청난 포인트 보상</p>
+            </div>
+            <div class="coupon"> <img src="css/reserva/images/event_01_10000p.png" alt=""> </div>
+        </div>
+    </div>
+    <!-- end event1 -->
+
+
+
+    <!-- event2 -->
+    <div id="event2">
+        <div class="container">
+            <div class="tit"> <img src="css/reserva/images/event_02.png" alt="">
+                <p class="p1" style="font-weight: bold"><span style="color: #ec5728">다多추천인</span></p>
+                <p class="p3" style="font-weight: bold">추가보상!</p>
+                <p class="p2">추천을 많이 받아 ‘다추천인’으로 등록되면 ‘다추천인’ 보상지급</p>
+            </div>
+            <div class="coupon"> <img src="css/reserva/images/event_02_coupon.png" alt=""> </div>
+        </div>
+    </div>
+    <!-- end event2 -->
+
+
+
+    <!-- notice -->
+    <div id="notice">
+        <div class="inner">
+            <p class="p1">* 이벤트 보상은 오픈 후 공지사항에 기재되며 일괄적으로 지급합니다.
+                <br/> <strong>단, 오픈 후 <strong style="color: red;">7일 이내에</strong> 회원가입을 하지 않으면 무효처리 됩니다.</strong>
+            </p>
+        </div>
+    </div>
+    <!-- end notice -->
+
+
+
+    <!-- 사전예약 -->
+	<form	name="insertcss/reservation" id="insertcss/reservation"
+			action="insertcss/reservation.do" method = "post">
+	</form>
+  <!-- novalidate onsubmit="submitcss/reservation();" -->
+  <form novalidate name="frmJoin" class="form-reserva" action="/reserva" method="post" onsubmit="return allSubmit();">
+    <div id="application">
+      <!-- 5. 참고로 함수는 다음과 같은 형식으로 제공된다.<br />
+      <div style='font:10pt/1.5 DotumChe;background-color:#000;color:#ddd;border:5px solid #000;padding:5px;width:96%;'>
+        function ip() {return "<script type="text/javascript">document.write(ip());</script>"};
+      </div><br /> -->
+
+
+        <div class="container">
+            <div class="section01"> <img src="css/reserva/images/application_title.png" alt="" style="float: left;">
+                <div class="tit" style="clear: both; text-align: left;">
+                    <p>사전등록 신청하기</p>
+                </div>
+            </div>
+            <div class="section02">
+
+              <!-- <p class=""><span style="font-size : 20px;"><%=location%></span></p> -->
+                <div class="contents_l">
+                    <div class="input">
+                        <p class="explanation">설명회</p>
+                        <input id="location" type="text" name="location" class="form-control" value="<%=location%>" style="font-size : 20px;" readOnly><br>
+                        <p class="name">이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름<span style = "color : red;">*</span></p>
+                        <input id="name" name="name" class="in_name" type="text" size="8"	placeholder="예) 홍길동" required/><br>
+                        <p class="phone">전화번호<span style = "color : red;">*</span></p>
+                        <input id="phone" name="phone" class="in_phone" type="text" maxlength="13" size="3" placeholder="숫자만 입력해 주세요" onclick='' onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' required>
+                        <button id="requestSMS" class="btn_certify_2" type="button" onclick=""><span style="font-weight: bold;">인증번호 받기</span></button><br>
+                        <p class="num">인증번호<span style = "color : red;">*</span></p>
+                        <input id="verification" name="verification" class="in_certify" type="text" maxlength="13" size="3"	onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' required>
+                        <button id="checkSMS" class="btn_certify" type="button"><span style="font-weight: bold;">인증번호 확인</span></button>
+                        <!-- <p class="ps" style="color: red">※ WeGen가입 시 사용될 이메일과 일치해야 합니다.</p> -->
+                    </div>
+                </div>
+                <div class="contents_r">
+                    <div class="input">
+                      <p class="phone1">추천인 전화번호</p>
+                      <input id="patron_phone1" name="patron_phone" class="in_phone" type="text" maxlength="13" size="3" placeholder="숫자만 입력해 주세요" onclick='' onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'>
+                    </div>
+                    <div class="ask">
+                      <button id="checkPatron" class="btn_ask" type="button"><span style="font-weight: bold;">전화번호 조회</span></button>
+                        <p class="ps"><span style="font-weight: bold;">※ 등록인과 추천인은 서로를 바꾸어 추천 불가합니다.<br/>추천을 많이 할수록 다추천인 보상을 많이 받을 수 있습니다.</span></p>
+                    </div>
+                    <div class="checklist">
+                        <p class="p_more">
+                        <label for="chkAgree">
+                        <input id="chkAgree" name="chkAgree" class="more" type="checkbox" value="true" <% if(chkAgree == true){%> checked="true" <% } %> >
+                        개인정보수집 및 문자수신 동의
+                        </label>
+                        </p>
+                        <button id="agreement" class="btn_more" type="button" onclick="checkAgreement();"><span style="font-weight: bold;">내용 보기</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end 사전예약 -->
+
+
+
+    <!--  last -->
+    <div id="last">
+        <div class="container">
+            <div class="btn">
+                <button class="btn_ask" type="submit">사전예약 등록</button>
+            </div>
+        </div>
+    </div>
+    </form>
+    <!-- end last -->
+
+
+    <div id="modal"></div>
+    <!-- footer -->
+    <div id="footer">
+        <div class="inner">
+            <!--            <img src="./images/footer_logo.png" alt="">-->
+            <p>사이트명 : 코인25 | 대표이사 : 차순학 | 사업자등록번호 : 887-86-00793 | 통신판매등록번호 : 제 2018-서울구로-0127호
+                <br/>메일 : help@coin25.co | Copyright ⓒMNU All Rights Reserved.</p>
+        </div>
+    </div>
+    <!-- end footer -->
+
+
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+			<img src="css/reserva/images/pop_tit.jpg" style="width:100%;">
+        </div>
+        <div class="modal-body">
+			<div id="">
+		        <div class="">
+		        </div>
+	        <div class="">
+			   <p>
+				'WeGen'는 (이하 '회사'는) 고객님의 개인정보를 중요시하며, "정보통신망 이용촉진 및 정보보호"에 관한 법률을 준수하고 있습니다.<br>
+				회사는 개인정보취급방침을 통하여 고객님께서 제공하시는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며, 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.<br>
+				회사는 개인정보취급방침을 개정하는 경우 웹사이트 공지사항(또는 개별공지)을 통하여 공지할 것입니다.<br><br>
+				본방침은 2018년 6월11일 부터 시행됩니다.<br><br>
+				■ 개인정보의 수집 및 이용목적<br>
+				회사는 수집한 개인정보를 다음의 목적을 위해 활용합니다.<br><br>
+				ο 서비스 제공에 관한 계약 이행 및 서비스 제공에 따른 요금정산 콘텐츠 제공 , 구매 및 요금 결제 , 물품배송 또는 청구지 등 발송<br><br>
+				ο 회원 관리<br>
+				회원제 서비스 이용에 따른 본인확인, 개인 식별, 연령확인, 만14세 미만 아동 개인정보 수집 시 법정 대리인 동의여부 확인, 고지사항 전달
+				ο 마케팅 및 광고에 활용<br>
+				접속 빈도 파악 또는 회원의 서비스 이용에 대한 통계<br><br>
+				■ 개인정보의 보유 및 이용기간<br><br>
+				회사는 개인정보 수집 및 이용목적이 달성된 후에는 예외 없이 해당 정보를 지체 없이 파기합니다.<br><br>
+				■ 개인정보의 파기절차 및 방법<br><br>
+				회사는 원칙적으로 개인정보 수집 및 이용목적이 달성된 후에는 해당 정보를 지체없이 파기합니다. 파기절차 및 방법은 다음과 같습니다.<br><br>
+				ο 파기절차<br>
+				회원님이 회원가입 등을 위해 입력하신 정보는 목적이 달성된 후 별도의 DB로 옮겨져(종이의 경우 별도의 서류함) 내부 방침 및 기타 관련 법령에 의한 정보보호 사유에 따라(보유 및 이용기간 참조) 일정 기간 저장된 후 파기되어집니다.<br><br>
+				별도 DB로 옮겨진 개인정보는 법률에 의한 경우가 아니고서는 보유되어지는 이외의 다른 목적으로 이용되지 않습니다.<br><br>
+				ο 파기방법<br>
+				- 전자적 파일형태로 저장된 개인정보는 기록을 재생할 수 없는 기술적 방법을 사용하여 삭제합니다.<br><br>
+				■ 개인정보 제공<br>
+				회사는 이용자의 개인정보를 원칙적으로 외부에 제공하지 않습니다. 다만, 아래의 경우에는 예외로 합니다.<br>
+				- 이용자들이 사전에 동의한 경우<br>
+				- 법령의 규정에 의거하거나, 수사 목적으로 법령에 정해진 절차와 방법에 따라 수사기관의 요구가 있는 경우<br><br>
+				■ 이용자 및 법정대리인의 권리와 그 행사방법<br>
+				이용자 및 법정 대리인은 언제든지 등록되어 있는 자신 혹은 당해 만 14세 미만 아동의 개인정보를 조회하거나 수정할 수 있으며 가입해지를 요청할 수도 있습니다.<br>
+				이용자 혹은 만 14세 미만 아동의 개인정보 조회 및 수정을 위해서는 ‘개인정보변경’(또는 ‘회원정보수정’ 등)을 가입해지(동의철회)를 위해서는 “회원탈퇴”를 클릭 하여 본인 확인 절차를 거치신 후 직접 열람, 정정 또는 탈퇴가 가능합니다. 혹은 개인정보관리책임자에게 서면, 전화 또는 이메일로 연락하시면 지체없이 조치하겠습니다.<br>
+				귀하가 개인정보의 오류에 대한 정정을 요청하신 경우에는 정정을 완료하기 전까지 당해 개인정보를 이용 또는 제공하지 않습니다. 또한 잘못된 개인정보를 제3자에게 이미 제공한 경우에는 정정 처리결과를 제3자에게 지체없이 통지하여 정정이 이루어지도록 하겠습니다.<br>
+				WeGen은 이용자 혹은 법정 대리인의 요청에 의해 해지 또는 삭제된 개인정보는 “WeGen이 수집하는 개인정보의 보유 및 이용기간”에 명시된 바에 따라 처리하고 그 외의 용도로 열람 또는 이용할 수 없도록 처리하고 있습니다.<br><br>
+				■ 개인정보 자동수집 장치의 설치, 운영 및 그 거부에 관한 사항<br><br>
+				회사는 귀하의 정보를 수시로 저장하고 찾아내는 ‘쿠키(cookie)’ 등을 운용합니다. 쿠키란 WeGen의 웹사이트를 운영하는데 이용되는 서버가 귀하의 브라우저에 보내는 아주 작은 텍스트 파일로서 귀하의 컴퓨터 하드디스크에 저장됩니다. 회사는 다음과 같은 목적을 위해 쿠키를 사용합니다.<br><br>
+				▶ 쿠키 등 사용 목적<br>
+				- 회원과 비회원의 접속 빈도나 방문 시간 등을 분석, 이용자의 취향과 관심분야를 파악 및 자취 추적, 각종 이벤트 참여 정도 및 방문 회수 파악 등을 통한 타겟 마케팅 및 개인 맞춤 서비스 제공<br><br>
+				귀하는 쿠키 설치에 대한 선택권을 가지고 있습니다. 따라서, 귀하는 웹브라우저에서 옵션을 설정함으로써 모든 쿠키를 허용하거나, 쿠키가 저장될 때마다 확인을 거치거나, 아니면 모든 쿠키의 저장을 거부할 수도 있습니다.<br><br>
+				▶ 쿠키 설정 거부 방법<br>
+				예: 쿠키 설정을 거부하는 방법으로는 회원님이 사용하시는 웹 브라우저의 옵션을 선택함으로써 모든 쿠키를 허용하거나 쿠키를 저장할 때마다 확인을 거치거나, 모든 쿠키의 저장을 거부할 수 있습니다.<br><br>
+				설정방법 예(Chrome의 경우)<br>
+				  1. 컴퓨터에서 Chrome을 엽니다.<br>
+          2. 오른쪽 상단에서 Chrome 맞춤 설정 및 제어를 클릭합니다.<br>
+          3. 하단에서 고급을 클릭합니다.<br>
+          4. '개인정보 및 보안'에서 콘텐츠 설정을 클릭합니다.<br>
+          5. 쿠키를 클릭합니다.<br>
+          6. 여기에서 다음과 같이 설정할 수 있습니다.<br>
+           - 쿠키 사용 설정: '차단됨' 옆의 스위치를 켭니다.<br>
+           - 쿠키 사용 중지: 사이트에서 쿠키 데이터를 저장하고 읽도록 허용 옵셥을 사용 중지합니다.<br><br>
+				단, 귀하께서 쿠키 설치를 거부하였을 경우 서비스 제공에 어려움이 있을 수 있습니다.<br><br><br>
+				▶귀하께서는 회사의 서비스를 이용하시며 발생하는 모든 개인정보보호 관련 민원을 개인정보관리책임자 혹은 담당부서로(help@cgmcoin.co.kr) 신고하실 수 있습니다. 회사는 이용자들의 신고사항에 대해 신속하게 충분한 답변을 드릴 것입니다.<br><br>
+				기타 개인정보침해에 대한 신고나 상담이 필요하신 경우에는 아래 기관에 문의하시기 바랍니다.<br>
+				1.개인분쟁조정위원회 (www.1336.or.kr/1336)<br>
+				2.정보보호마크인증위원회 (www.eprivacy.or.kr/02-580-0533~4)<br>
+				3.대검찰청 인터넷범죄수사센터 (http://icic.sppo.go.kr/02-3480-3600)<br>
+				4.경찰청 사이버테러대응센터 (www.ctrc.go.kr/02-392-0330)<br>
+	 			</p>
+			</div>
+        </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+    <!-- 버튼 1개 확인 창 -->
+    <div id="dialog1"></div>
+    <section id="dialog" class="dialog-box effect-fade show" style="width: 350px; height: 154px; margin-top: -77px; margin-left: -130px; z-index: 99999; display: block;">
+        <div class="dialog-box-container normal">
+            <div class="dialog-box-content">안녕하세요!<br/>안녕하세요!</div>
+            <div class="dialog-btn"><span class="dialog-btn-confirm">확인</span></div>
+        </div>
+    </section>
+
+    <!-- 버튼 2개 확인 창 -->
+    <div id="dialog2"></div>
+    <section id="dialog" class="dialog-box effect-fade show" style="width: 350px; height: 154px; margin-top: -77px; margin-left: -130px; z-index: 99999; display: block;">
+        <div class="dialog-box-container normal">
+            <div class="dialog-box-content">안녕하세요!<br/>안녕하세요!</div>
+            <div class="dialog-btn"><span class="dialog-btn-cancel">취소</span><span class="dialog-btn-confirm">확인</span></div>
+        </div>
+    </section>
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="css/reserva/dist/js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="css/reserva/assets/js/vendor/holder.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="css/reserva/assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+
+<script type="text/javascript">
+var checkSMSdone = "0";
+var certi2 = "0";
+// var certi2 = randomNum.authNo(6);
+// var certi3 = certi2;
+
+function numkeyCheck(e) {
+	var keyValue = event.keyCode;
+	console.log("keyValue:" + keyValue);
+
+	if( ((keyValue >= 48) && (keyValue <= 57)) )
+		return true;
+	else
+		return false;
+}
+
+function checkAgreement() {
+    $("#myModal").modal();
+}
+
+//인증번호 받기
+$('#requestSMS').click( function() {
+    var name = $("#name").val().trim();
+    var phone = $("#phone").val();
+    var verification = $("#verification").val();
+    certi2 = randomNum.authNo(6);
+    var check = "0";
+    var data1 = certi2;                    //인증번호
+    var data = {"data1":data1, "verification":verification, "phone":phone, "check":check, "name":name}; //post로 보낼려는 데이터
+
+    if (phone != '') {
+      $.ajax({
+        url: 'http://123.140.149.243:3101/reserva',
+        type: 'POST',
+        data: data,
+        success:function(data){
+	        if(data['result'] == true) {
+            alert("인증번호가 전송되었습니다. ");
+	        } else {
+	        	alert("사전예약된 전화번호 입니다.");
+	        }
+	         //alert('통신성공 data : ' + data);
+        },
+        complete : function(data) {
+            // 통신이 실패했어도 완료가 되었을 때 이 함수를 타게 된다.
+            // TODO
+            //alert('통신완료 data : ' + data);
+	      },
+	      error : function(xhr, status, error) {
+	            alert("에러 -  : " + status + ", xhr : " + xhr + ", error : "+ error + ", phone: "+ phone);
+	      }
+    });
+  } else {
+    alert("전화번호를 입력해 주세요");
+  }
+})
+
+//인증번호확인
+$('#checkSMS').click( function() {
+    var phone = $("#phone").val();
+    var verification = $("#verification").val();
+    var check = "1";
+    var msg1 = "인증번호 일치";
+    var msg2 = "인증번호 불일치";
+    var data1 = certi2;
+    checkSMSdone = "0";
+    var data = {"verification":verification, "phone":phone , "check":check, "data1":data1, "checkSMSdone":checkSMSdone};
+
+    if(verification != '' && phone != ''){
+    $.ajax({
+        url: 'http://123.140.149.243:3101/reserva',
+        type: 'POST',
+        data: data,
+        success:function(data){
+	        if(data['result'] == true) {
+            checkSMSdone = "1";
+            alert(msg1);
+	        } else {
+	        	alert(msg2);
+	        }
+	         // alert('통신성공 data : ' + data);
+        },
+        complete : function(data) {
+            // 통신이 실패했어도 완료가 되었을 때 이 함수를 타게 된다.
+            // TODO
+            //alert('통신완료 data : ' + data);
+	      },
+	      error : function(xhr, status, error) {
+	            alert("에러 -  : " + status + ", xhr : " + xhr + ", error : "+ error + ", verification: "+ verification);
+	      }
+    });
+  } else {
+    alert("인증번호를 입력하세요.");
+  }
+})
+
+//추천인 전화번호 번호 조회
+$('#checkPatron').click( function(){
+  var patron_phone1 = $('#patron_phone1').val();
+  var patronCheck = "1";
+  var msg1 = "등록할 수 있는 추천인 전화번호 입니다.";
+  var msg2 = "추천인 전화번호가 존재하지 않습니다.";
+  var data = {"patron_phone1":patron_phone1 , "patronCheck":patronCheck};
+
+
+  if(patron_phone1 != ''){
+  $.ajax({
+      url: 'http://123.140.149.243:3101/reserva',
+      type: 'POST',
+      data: data,
+      success:function(data){
+        if(data['result'] == true) {
+          alert(msg1);
+           // $("#verification").attr("placeholder", "인증메일이 전송되었습니다.");
+        } else {
+          alert(msg2);
+        }
+         // alert('통신성공 data : ' + data);
+      },
+      complete : function(data) {
+          // 통신이 실패했어도 완료가 되었을 때 이 함수를 타게 된다.
+          // TODO
+          //alert('통신완료 data : ' + data);
+      },
+      error : function(xhr, status, error) {
+            alert("에러 -  : " + status + ", xhr : " + xhr + ", error : "+ error + ", verification: "+ verification);
+      }
+  });
+} else {
+  alert("추천인 전화번호를 입력하세요.");
+}
+})
+
+//사전예약등록 버튼
+function allSubmit(event) {
+
+    var msg = "";
+    var name = $("#name").val().trim();
+    var phone = $("#phone").val().trim();
+    var patron_phone1 = $("#patron_phone1").val().trim();
+    var verification = $("#verification").val().trim();
+
+    if (name == ''){
+        msg = "이름을 입력해 주세요";
+        alert(msg);
+        return false;
+    } else if (phone == ''){
+        msg = "휴대폰 번호를 입력해 주세요";
+         alert(msg);
+         return false;
+    } else if (verification == ''){
+        msg = "인증 번호를 입력해 주세요";
+         alert(msg);
+         return false;
+    } else if (checkSMSdone != "1") {
+      msg = "인증번호를 확인해 주세요";
+      alert(msg);
+      return false;
+    } else if ($("#chkAgree").is(":checked") != true){
+      msg = "개인정보 수집 및 문자 수신에 동의 해 주세요";
+      alert(msg);
+      return false;
+    } else if (phone == patron_phone1) {
+      msg = "예약자와 추천인의 전화번호가 같을 수 없습니다.";
+      alert(msg);
+      return false;
+    } else if (patron_phone1 == ''){
+      if (confirm('추천인 없이 등록을 진행 하시겠습니까??')) {
+        var data = {"name":name, "phone":phone, "patron_phone1":patron_phone1, "verification":verification};
+        updatecss/reservation(data);
+        return;
+      } else {
+        msg = "추천인의 전화번호를 입력해 주세요";
+        alert(msg);
+        return;
+      }
+    }
+
+}
+
+function email_check( email ) {
+    var regex=/([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    return (email != '' && email != 'undefined' && regex.test(email));
+}
+
+// check when email input lost foucus
+$(".in_email").blur(function(){
+  var email = $(this).val();
+
+  // if value is empty then exit
+  if( email == '' || email == 'undefined') return;
+
+  // valid check
+  if(! email_check(email) ) {
+  	$("#result-check").text('Not valid email.');
+    alert("유효하지않은 이메일형식 입니다.");
+    // $(this).focus();
+    return false;
+  }
+  else {
+  	$("#result-check").text('Email address test OK.');
+  }
+});
+
+function phone_check( text ){
+  var regExp = /^(01[016789]{1})([0-9]{3,4})([0-9]{4})$/;
+  return ( text != '' && text != 'undefined' && regExp.test(text));
+}
+
+$(".in_phone").blur(function(){
+  var text = $(this).val();
+  if ( text == '' || text == 'undefined') return;
+
+  if(! phone_check( text) ) {
+    $("#result-check").text('Not valid phone.');
+    alert("유효하지않은 폰번호입니다.")
+    return false;
+  }
+  else {
+    $("#result-check").text('phone number test OK.');
+  }
+});
+
+$(".in_phone2").blur(function(){
+  var text = $(this).val();
+  if ( text == '' || text == 'undefined') return;
+
+  if(! phone_check( text) ) {
+    $("#result-check").text('Not valid phone.');
+    alert("유효하지않은 폰번호입니다.")
+    return false;
+  }
+  else {
+    $("#result-check").text('phone number test OK.');
+  }
+});
+
+</script>
+
+</html>

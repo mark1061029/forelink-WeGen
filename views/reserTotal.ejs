@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../common/bootstrap.ejs %>
+    <link rel="shortcut icon" href="images/ofavicon.ico" />
+    <title>사전등록인 요약</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.16/b-1.5.1/b-colvis-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.16/b-1.5.1/b-colvis-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/datatables.min.js"></script>
+  </head>
+  <body onload=comma()>
+    <% include ../common/header.ejs %>
+    <div class="container">
+      <h3>사전등록인 요약</h3></br>
+      <div class="row">
+        <div class="counter_text">
+            <p>사전등록인 수 : <strong style="color: #000;"><%=totalReser%></strong></p>
+        </div><br>
+        <div class="counter_text">
+            <p>추천인 수 : <strong style="color: #000;"><%=totalPatron%></strong></p>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $('#ledger').DataTable({
+      });
+    })
+    </script>
+  </body>
+</html>

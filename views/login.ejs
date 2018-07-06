@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ../common/bootstrap.ejs %>
+    <title></title>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <!-- <script>
+    function chkCaptcha() {
+      if(typeof(grecaptcha) != 'undefined') {
+         if (grecaptcha.getResponse() == "") {
+           swal('recaptcha를 확인해주세요.','','error')
+             // alert("스팸방지코드를 확인해 주세요.");
+              return false;
+          }
+      }
+        else {
+             return false;
+        }
+    }
+    </script> -->
+
+    <!-- <style>
+    .g-recaptcha{
+      text-align: center !important;
+    }
+    </style> -->
+  </head>
+  <body>
+    <div class="">
+    <%- include ../common/header.ejs %>
+    </div>
+    <div class="container center-box">
+      <div class="inner-box">
+        <% if(otpCheck == true){ %>
+          <form class="form-signin" action="/otp-verification" method="post">
+            <h2 class="form-signin-heading"><%= i18n.login_label_login%></h2>
+            <p><%= currentCode%></p>
+            <!-- <p><%- qrCode%></p> -->
+            <label for="inputId" class="sr-only"><%= i18n.login_label_ID%></label>
+            <input type="hidden" id="inputEmail" name="email" class="form-control" placeholder="이메일" value="<%= userEmail%>" required><br>
+            <label for="inputPassword" class="sr-only"><%= i18n.login_label_pwd%></label>
+            <input type="hidden" id="inputPassword" name="pwd" class="form-control" placeholder="비밀번호" value="<%= userPwd%>" required><br>
+            <label for="inputOTP" class="sr-only">OTP</label>
+            <input type="text" id="inputOTP" class="form-control" name="otpCode" placeholder="OTP Code" value="" required autofocus><br>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit" name="button"><%= i18n.login_btn_login%></button>
+          </form>
+        <% }else{ %>
+          <% if(reCaptcha == true){ %>
+            <form class="form-signin" action="/login" method="post">
+              <h2 class="form-signin-heading"><%= i18n.login_label_login%></h2>
+              <label for="inputId" class="sr-only"><%= i18n.login_label_ID%></label>
+              <input type="text" id="inputEmail" name="email" class="form-control" placeholder="이메일" value="" required autofocus ><br>
+              <label for="inputPassword" class="sr-only"><%= i18n.login_label_pwd%></label>
+              <input type="password" id="inputPassword" name="pwd" class="form-control" placeholder="비밀번호" value="" required><br>
+
+              <div class="brand">
+           		 <a href="/"><img class="img-fluid" src="images/logo_main.png" alt=""></a> with me? <a href="/signup">Sign up</a>
+           	  </div>
+              </br>
+              <div class="center">
+                <div id="grecaptcha" class="g-recaptcha" data-sitekey="6LdV7VMUAAAAADNaJf6cFLyRzR0AASIPsVMxLJgi"></div><br>
+              </div>
+
+
+              <button class="btn btn-lg btn-primary btn-block" type="submit" name="button" onclick="return chkCaptcha();"><%= i18n.login_btn_login%></button>
+            </form>
+            <div class="row">
+        			<div class="col-lg-6 col-md-6">
+                <div class="text-left" style="font-size: 2rem">
+                  <!-- <a href="/signup">회원가입</a> -->
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <div class="text-right" style="font-size: 2rem">
+                  <a href="/findPwd"><%= i18n.login_label_findpwd%></a>
+                </div>
+              </div>
+            </div>
+          <% }else{ %>
+            <form class="form-signin" action="/login" method="post">
+              <h2 class="form-signin-heading"><%= i18n.login_label_login%></h2>
+              <label for="inputId" class="sr-only"><%= i18n.login_label_ID%></label>
+              <input type="text" id="inputEmail" name="email" class="form-control" placeholder="이메일" value="" required autofocus ><br>
+              <label for="inputPassword" class="sr-only"><%= i18n.login_label_pwd%></label>
+              <input type="password" id="inputPassword" name="pwd" class="form-control" placeholder="비밀번호" value="" required><br>
+
+              <button class="btn btn-lg btn-primary btn-block" type="submit" name="button"><%= i18n.login_btn_login%></button>
+            </form>
+            <div class="row">
+        			<div class="col-lg-6 col-md-6">
+                <div class="text-left" style="font-size: 2rem">
+                  <a href="/signup">회원가입</a>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <div class="text-right" style="font-size: 2rem">
+                  <a href="/findPwd"><%= i18n.login_label_findpwd%></a>
+                </div>
+              </div>
+            </div>
+          <% } %>
+        <% } %>
+        <div class="from-group" id="otp">
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

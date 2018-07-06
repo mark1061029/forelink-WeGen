@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ../common/bootstrap.ejs %>
+    <title></title>
+  </head>
+  <body>
+    <%- include ../common/header.ejs %>
+    <div class="container">
+      <form class="" action="/permissions/<%=addr%>" method="post">
+
+        <div class="form-group">
+          <label for="name"><%= i18n.permissoions_label_ID%></label>
+          <input type="text" class="form-control" disabled placeholder="<%=email%>" name="name" value="">
+        </div>
+
+        <div class="form-group">
+          <label for="addr"><%= i18n.permissoions_label_addrWallet%></label>
+          <input type="text" class="form-control" name="addr" value="<%= addr%>" disabled>
+          <input type="hidden" name="hiddenAddr" value="<%=addr%>">
+        </div>
+
+        <div class="form-group">
+          <label for=""><%= i18n.permissoions_label_permissionlist%></label><br>
+
+          <%
+            var keys = {
+              admin : 'false',
+              mine : 'false',
+              create : 'false',
+              issue : 'false',
+              receive : 'false',
+              connect : 'false',
+              activate : 'false',
+              send : 'false'
+            }
+
+
+
+            for(var index in permissions){
+              for(var key in keys){
+                if(permissions[index] == key){
+                  keys[key] = 'true'
+                }
+              }
+            }
+          %>
+
+          <!--- 'disabled' added on mine/admin/activate by leepg, it is not working --->
+          <!--
+          <% if(!user && user !== 'admin'){ %>
+          <input type="checkbox" name="mine" value="mine" <% if(keys.mine === 'true'){ %> checked="true" <% } %> disabled>
+          <label for="checkbox-inline"><%= i18n.permissoions_label_mine1%></label>
+          &nbsp&nbsp&nbsp
+          <input type="checkbox" name="admin" value="admin" <% if(keys.admin === 'true'){%> checked="true" <%} %> disabled>
+          <label for="checkbox-inline"><%= i18n.permissoions_label_admin1%></label>
+          &nbsp&nbsp&nbsp
+          <input type="checkbox" name="activate" value="activate" <% if(keys.activate === 'true'){%> checked="true" <%} %> disabled>
+          <label for="checkbox-inline"><%= i18n.permissoions_label_acti1%></label>
+          <% }else{ %>
+          <input type="checkbox" name="mine" value="mine" <% if(keys.mine === 'true'){ %> checked="true" <% } %>>
+          <label for="checkbox-inline"><%= i18n.permissoions_label_mine2%></label>
+          &nbsp&nbsp&nbsp
+          <input type="checkbox" name="admin" value="admin" <% if(keys.admin === 'true'){%> checked="true" <%} %>>
+          <label for="checkbox-inline"><%= i18n.permissoions_label_admin2%></label>
+          &nbsp&nbsp&nbsp
+          <input type="checkbox" name="activate" value="activate" <% if(keys.activate === 'true'){%> checked="true" <%} %>>
+          <label for="checkbox-inline"><%= i18n.permissoions_label_acti2%></label>
+          <% } %>
+          &nbsp&nbsp&nbsp
+          <input type="checkbox" name="connect" value="connect" <% if(keys.connect === 'true'){%> checked="true" <%} %> >
+          <label for="checkbox-inline"><%= i18n.permissoions_label_connect%></label>
+          &nbsp&nbsp&nbsp
+          -->
+
+          <input type="checkbox" name="send" value="send" <% if(keys.send === 'true'){%> checked="true" <%} %> >
+          <label for="checkbox-inline"><%= i18n.permissoions_label_send%></label>
+          &nbsp&nbsp&nbsp
+          <input type="checkbox" name="receive" value="receive" <% if(keys.receive === 'true'){%> checked="true" <%} %> >
+          <label for="checkbox-inline"><%= i18n.permissoions_label_receive%></label>
+          &nbsp&nbsp&nbsp
+
+          <!--
+          <input type="checkbox" name="issue" value="issue" <% if(keys.issue === 'true'){%> checked="true" <%} %> >
+          <label for="checkbox-inline"><%= i18n.permissoions_label_issue%></label>
+          &nbsp&nbsp&nbsp
+          <input type="checkbox" name="create" value="create" checked="true" <% if(keys.create === 'true'){%> checked="true" <%} %> disabled>
+          <label for="checkbox-inline"><%= i18n.permissoions_label_create%></label>
+          -->
+
+          <!--- 'disabled' added by leepg, it is mandatory --->
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success pull-right asset" name="button"><%= i18n.permissoions_btn_change%></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

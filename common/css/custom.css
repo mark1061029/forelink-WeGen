@@ -1,0 +1,39 @@
+button.asset {
+  width : 150px;
+}
+
+.center {
+  display : block;
+  margin-left : auto;
+  margin-right : auto;
+  width: 50%;
+}
+
+.center-box {
+  width: 100%;
+  text-align:center;
+  vertical-align: middle;
+}
+
+.inner-box {
+  padding : 100px 0 0 0;
+  width: 500px;
+  display: inline-block;
+}
+
+#topheader .navbar-nav li > a {
+	text-transform: capitalize;
+	color: #333;
+	transition: background-color .2s, color .2s;
+
+	&:hover,
+	&:focus {
+		background-color: #333;
+		color: #fff;
+	}
+}
+
+#topheader .navbar-nav li.active > a {
+	background-color: #333;
+	color: #fff;
+}

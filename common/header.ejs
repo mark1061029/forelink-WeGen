@@ -1,0 +1,66 @@
+<script type="text/javascript">
+  $( '#topheader .navbar-nav a' ).on( 'click', function () {
+    $( '#topheader .navbar-nav' ).find( 'li.active' ).removeClass( 'active' );
+    $( this ).parent( 'li' ).addClass( 'active' );
+  });
+</script>
+<style>
+.small{
+	width: 20px;
+}
+</style>
+<div id="topheader">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <!-- <a href="/" class="navbar-brand"><strong><%= i18n.header_navhome%></strong></a> -->
+      </div>
+      <% if(page_name !== undefined){ %>
+        <% if(user['user']){ %>
+          <ul class="nav navbar-nav">
+            <a href="/" class="navbar-brand"><strong><%= i18n.header_navhome%></strong></a>
+            <li <% if (page_name === 'myWallet') { %>class="active" <% } %> ><a href="/myWallet/<%=user['user']['addr']%>"><strong><%= i18n.header_navMyWallet%></strong></a></li>
+            <li <% if (page_name === 'ledger') { %>class="active" <% } %> ><a href="/ledger/<%=user['user']['addr']%>"><strong><%= i18n.header_navledger%></strong></a></li>
+            <li <% if (page_name === 'addressDetail') { %>class="active" <% } %> ><a href="/addressDetail/<%=user['user']['addr']%>"><strong><%= i18n.header_navAddrDetail%></strong></a></li>
+            <li <% if (page_name === 'sendAsset') { %>class="active" <% } %> ><a href="/sendAsset"><strong><%= i18n.header_navSendAsset%></strong></a></li>
+            <li <% if (page_name === 'icoParticipate') { %>class="active" <% } %> ><a href="/icoParticipate"><strong><%= i18n.header_navicoParticipate%></strong></a></li>
+          <% if(user['user']['isAdmin']){ %>
+            <li <% if (page_name === 'address') { %>class="active" <% } %> ><a href="/address"><strong><%= i18n.header_navAddruser%></strong></a></li>
+            <li <% if (page_name === 'issue') { %>class="active" <% } %> ><a href="/issue"><strong><%= i18n.header_navIssue%></strong></a></li>
+            <li <% if (page_name === 'configure') { %>class="active" <% } %> ><a href="/configure"><strong><%= i18n.header_navConfigure%></strong></a></li>
+            <li <% if (page_name === 'adminLedger') { %>class="active" <% } %> ><a href="/adminLedger"><strong><%= i18n.header_navAdminLedger%></strong></a></li>
+
+            <% if(user['session']['testMode']){%>
+              <li <% if (page_name === 'ethereumTest') { %>class="active" <% } %> ><a href="/ethereumTest"><strong><%= i18n.header_navEthtest%></strong></a></li>
+            <% } %>
+
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#"><strong>보고서</strong><span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/reserReport"><strong>사전등록인 목록</strong></a></li>
+                <li><a href="/reserRecom"><strong>추천인별 사전등록인 수</strong></a></li>
+                <li><a href="/reserDays"><strong>일별 사전등록인 수</strong></a></li>
+                <li><a href="/reserSMS"><strong>SMS 발송 내역</strong></a></li>
+                <li><a href="/reserTotal"><strong>사전등록인 요약</strong></a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#"><strong>다국어</strong><span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a class="<%=(lang=="kor"?"active":"")%>" href="/configure?clang=kor"><img class="small" sytle="display: inline-block;" src="images/ko.jpg" /><span style="margin-right:10px;font-size:12pt;">&nbsp; &nbsp;한국어</span></a></li>
+                <li><a class="<%=(lang=="en"?"active":"")%>" href="/configure?clang=en"><img class="small" sytle="display: inline-block;" src="images/en.jpg" /><span style="margin-right:10px;font-size:12pt;">&nbsp; &nbsp;English</span></a></li>
+              </ul>
+            </li>
+          <% } %>
+        </ul>
+        <span class="right-box" style="float: right;" >
+          <form class="navbar-form navbar-right">
+            <b class="text-primary"><%= user['user']['name'] %><%= i18n.header_msg1%></b>
+            <button type="button" class="btn btn-success" onclick="location.href='/logout'"><%= i18n.header_btn_logout%></button>
+          </form>
+        </span>
+      <% } %>
+    <% } %>
+    </div>
+  </nav>
+</div>

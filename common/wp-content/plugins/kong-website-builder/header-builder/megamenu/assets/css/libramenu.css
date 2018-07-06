@@ -1,0 +1,53 @@
+/** {*/
+    /*padding: 0;*/
+    /*margin: 0;*/
+/*}*/
+
+/*ul {*/
+    /*list-style-type: none;*/
+/*}*/
+
+/*ul.primary-menu {*/
+    /*position: relative;*/
+/*}*/
+
+/*ul.primary-menu > li {*/
+    /*float: left;*/
+/*}*/
+
+/*ul.primary-menu:after {*/
+    /*display: table;*/
+    /*content: '';*/
+    /*clear: both;*/
+/*}*/
+
+/*.kongmenu-anchor {*/
+    /*display: block;*/
+    /*padding: 15px 20px;*/
+/*}*/
+
+/*.kongmenu-row {*/
+    /*margin-bottom: 10px;*/
+/*}*/
+
+/*.kongmenu-row:after {*/
+    /*content: '';*/
+    /*display: table;*/
+    /*clear: both;*/
+/*}*/
+
+/*.kongmenu-submenu .kongmenu-column {*/
+    /*max-width: 100%;*/
+    /*min-width: 100px;*/
+    /*width: auto;*/
+    /*float: left;*/
+/*}*/
+
+/*.kongmenu-dropdown {*/
+    /*position: absolute;*/
+    /*top: auto;*/
+    /*left: 0;*/
+    /*width: 100%;*/
+    /*display: none;*/
+    /*z-index: 100;*/
+/*}*/

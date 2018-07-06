@@ -1,0 +1,121 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: KONG Theme\n"
+"POT-Creation-Date: 2017-08-09 19:56+0700\n"
+"PO-Revision-Date: 2017-08-09 19:56+0700\n"
+"Last-Translator: \n"
+"Language-Team: kolumn.io\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.3\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: node_modules\n"
+"X-Poedit-SearchPathExcluded-1: kong-framework/demo-importer\n"
+"X-Poedit-SearchPathExcluded-2: kong-framework/include\n"
+"X-Poedit-SearchPathExcluded-3: kong-framework/metabox\n"
+"X-Poedit-SearchPathExcluded-4: kong-framework/one-click\n"
+"X-Poedit-SearchPathExcluded-5: kong-framework/plugins\n"
+"X-Poedit-SearchPathExcluded-6: kong-framework/share_resources\n"
+"X-Poedit-SearchPathExcluded-7: kong-framework/theme-options\n"
+"X-Poedit-SearchPathExcluded-8: kong-framework/theme-scripts\n"
+"X-Poedit-SearchPathExcluded-9: kong-framework/pb_widgets\n"
+"X-Poedit-SearchPathExcluded-10: kong-framework/models\n"
+
+#: comments.php:13
+msgid "1 comment"
+msgstr "1 comment"
+
+#: comments.php:51
+msgid "Comments are closed."
+msgstr "Comments are closed."
+
+#: comments.php:65
+msgid "Name"
+msgstr "Name"
+
+#: comments.php:69
+msgid "Email"
+msgstr "Email"
+
+#: comments.php:73
+msgid "Website"
+msgstr "Website"
+
+#: comments.php:108
+msgid "Edit"
+msgstr "Edit"
+
+#: comments.php:113
+msgid "Your comment is awaiting moderation."
+msgstr "Your comment is awaiting moderation."
+
+#: functions.php:30
+msgid "Primary Menu"
+msgstr "Primary Menu"
+
+#: kong-framework/KongTheme.php:237 kong-framework/KongTheme.php:240
+msgid "Human verification failed"
+msgstr "Human verification failed"
+
+#: kong-framework/render.php:16 kong-framework/render.php:77
+msgid "on"
+msgstr "on"
+
+#: kong-framework/render.php:76 kong-framework/shortcodes.php:775
+#: kong-framework/widgets/classes/KongRecentPostsWidget.php:54
+msgid "by"
+msgstr "by"
+
+#: kong-framework/render.php:105
+msgid "Share to"
+msgstr "Share to"
+
+#: kong-framework/render.php:157
+msgid "All author posts"
+msgstr "All author posts"
+
+#: kong-framework/render.php:173
+msgid "Previous post"
+msgstr "Previous post"
+
+#: kong-framework/render.php:182
+msgid "Next post"
+msgstr "Next post"
+
+#: kong-framework/render.php:249
+msgid "Load More"
+msgstr "Load More"
+
+#: kong-framework/render.php:250
+msgid "Loading..."
+msgstr "Loading…"
+
+#: kong-framework/render.php:287
+msgid "No more posts to load"
+msgstr "No more posts to load"
+
+#: kong-framework/render.php:376
+msgid "Read more..."
+msgstr "Read more..."
+
+#: kong-framework/shortcodes.php:777
+msgid "Read more"
+msgstr "Read more"
+
+#: template-parts/search-content.php:16
+msgid "Type and hit enter"
+msgstr "Type and hit enter"
+
+#: template-parts/search-content.php:24
+msgid "Search results"
+msgstr "Search results"
+
+#: template-parts/search-content.php:24
+msgid "found"
+msgstr "found"

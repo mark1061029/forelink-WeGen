@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../common/bootstrap.ejs %>
+    <link rel="shortcut icon" href="images/ofavicon.ico" />
+    <title></title>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+
+  </head>
+  <body>
+    <% include ../common/header.ejs %>
+    <div class="container">
+      <h2><%= i18n.sendDetail_subtitle%> / <%=thisuser%></h2>
+      <div class="row">
+        <table id="ledger" class="table table-striped">
+          <thead>
+            <tr>
+              <th class="text-left"><%= i18n.sendDetail_time%></th>
+              <th class="text-center"><%= i18n.sendDetail_Depositor%></th>
+              <th class="text-center"><%= i18n.sendDetail_Deposit%></th>
+              <th class="text-center"><%= i18n.sendDetail_Withdrawal%></th>
+              <th class="text-center"><%= i18n.sendDetail_Memo%></th>
+              <th class="text-right"><%= i18n.sendDetail_Balance%></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(var index in data){ %>
+              <tr>
+                <td class="text-left"><%=data[index]['date']%></td>
+                <td class="text-center"><%=data[index]['to']%></td>
+                <td class="text-center"><%=data[index]['input']%></td>
+                <td class="text-center"><%=data[index]['output']%></td>
+                <td class="text-center"><%=data[index]['memo']%></td>
+                <td class="text-right"><%=data[index]['balance']%></td>
+              </tr>
+            <%}%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $('#ledger').DataTable();
+        dom: 'Blfrtip',
+        lengthMenu : [
+          [10, 25, 50, -1],
+          ['10 rows', '25 rows', '50 rows', 'Show all']
+        ],
+        buttons: [
+          'excel'
+        ]
+    });
+    </script>
+  </body>
+</html>

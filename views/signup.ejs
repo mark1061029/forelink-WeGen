@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ../common/bootstrap.ejs %>
+    <title></title>
+    <script type="text/javascript">
+     function CheckForm(Join){
+
+         //체크박스 체크여부 확인 [하나]
+         var chk1=document.frmJoin.U_checkAgreement1.checked;
+         var chk2=document.frmJoin.U_checkAgreement2.checked;
+
+         if(!chk1){
+           swal({
+              type: 'error',
+              width: '40rem',
+              title: '<%= i18n.signup_alert_msg1%>',
+              text: 'Something went wrong!',
+              footer: '<a href>Why do I have this issue?</a>',
+           })
+             return false;
+         }
+         if(!chk2) {
+           swal({
+               type: 'error',
+               width: '40rem',
+               title: '<%= i18n.signup_alert_msg2%>',
+               text: 'Something went wrong!',
+               footer: '<a href>Why do I have this issue?</a>',
+           })
+             return false;
+         }
+         if(grecaptcha.getResponse() == ""){
+           alert("<%= i18n.signup_alert_msg3%>");
+           return false;
+         }
+       }
+     </script>
+  </head>
+  <body>
+    <div class="">
+        <%- include ../common/header.ejs %>
+    </div>
+    </div>
+      <div class="container">
+        <form name="frmJoin" class="form-signin" action="/signup" method="post" onsubmit="return CheckForm()">
+          <h2 class="form-signin-heading"><%= i18n.signup_subtitle%></h2>
+
+          <!-- <label for="inputId" class="sr-only"><%= i18n.signup_ID%></label>
+          <input type="text" id="inputId" name="id" class="form-control" placeholder="아이디 (영문자, 숫자 포함 6자 이상)" value="" pattern="[a-zA-Z][_a-zA-Z0-9]{5,}" required><br> -->
+
+          <label for="inputEmail" class="sr-only"><%= i18n.signup_email%></label>
+          <input type="email" id="inputEmail" name="email" class="form-control" placeholder="이메일" value="" required><br>
+
+          <label for="inputPwd" class="sr-only"><%= i18n.signup_pwd%></label>
+          <input type="password" id="inputPwd" name="pwd" class="form-control" placeholder="비밀번호 (영문자, 숫자, 특수문자 포함 10자 이상)" value="" required
+                 pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&_\-+=~.])[A-Za-z\d$@$!%*#?&_\-+=~.]{10,}$"><br>
+
+          <label for="inputPwd2" class="sr-only"><%= i18n.signup_pwd2%></label>
+          <input type="password" id="inputPwd2" name="pwd2" class="form-control" placeholder="비밀번호 확인" value="" required><br>
+
+          <label for="inputName" class="sr-only"><%= i18n.signup_name%></label>
+          <input type="text" id="inputName" name="name" class="form-control" placeholder="이름" value="" required><br>
+
+
+          <label for="inputPhone" class="sr-only"><%= i18n.signup_number%></label> <!--- tel is supported only safari --->
+          <input type="tel" id="inputPhone" name="phone" class="form-control" placeholder="전화번호" value="" ><br>
+          <input type="checkbox" id="U_checkAgreement1" name="U_checkAgreement1" />
+          <label for="c1"><a href="img/WEGENCOIN 판매 요약.pdf" target="_blank" style="color: blue"><%= i18n.signup_chk_msg1%></a><%= i18n.signup_chk_msg1_1%></label></br>
+          <input type="checkbox" id="U_checkAgreement2" name="U_checkAgreement2" />
+          <label for="c2"><a href="/termsAndConditions" target="_blank" style="color: blue"><%= i18n.signup_chk_msg2%></a> <%= i18n.signup_chk_msg2_1%> <a href="img/개인 정보 보호 정책.pdf" target="_blank" style="color: blue"><%= i18n.signup_chk_msg2_2%></a><%= i18n.signup_chk_msg2_3%></label>
+          <button class="btn btn-lg btn-primary btn-block" type="submit" name="button"><%= i18n.signup_btn_signup%></button>
+        </form>
+      </div>
+  </body>
+</html>

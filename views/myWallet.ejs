@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ../common/bootstrap.ejs %>
+    <link rel="shortcut icon" href="images/ofavicon.ico" />
+    <title></title>
+    <script>
+    function backKeyCode(event) {
+      event = event || window.event;
+      var keyID = (event.which) ? event.which : event.keyCode;
+      if( keyID === 8 )
+      {
+        return false;
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <div class="">
+      <%- include ../common/header.ejs %>
+    </div>
+    <div class="container">
+      <div class="form-group">
+        <label for="ethAddr"><%= i18n.myWallet_label1%></label>
+        <input type="text" class="form-control" name="multiAddr" value="<%=multiAddr%>" onkeydown="return backKeyCode(event)" readOnly>
+      </div>
+
+      <div class="form-group">
+        <label for="ethAddr"><%= i18n.myWallet_label2%></label>
+        <input type="text" id="assetBalance" class="form-control" name="balance" value="<%=balance%>" onkeydown="return backKeyCode(event)" readOnly>
+      </div>
+    </div>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      var recordCount = $('#assetBalance').html();
+
+      var temp = recordCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+      $('#assetBalance').html(temp);
+    })
+    </script>
+  </body>
+</html>

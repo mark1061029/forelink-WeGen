@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ../common/bootstrap.ejs %>
+    <title></title>
+  </head>
+  <body>
+    <%- include ../common/header.ejs %>
+
+    <div class="container">
+      <h2>가상 이더리움 입금</h2>
+
+      <form class="" action="/ethereumTest" method="post">
+        <div class="form-group">
+          <label for="fromAddress">From Address</label>
+          <input type="text" class="form-control" placeholder="0xDECAF9CD2367cdbb726E904cD7397eDFcAe6068D" name="fromAddress" value="" required>
+        </div>
+        <div class="form-group">
+          <label for="ToAddress">To Address</label>
+          <input type="text" class="form-control" placeholder="0xDECAF9CD2367cdbb726E904cD7397eDFcAe6068D" name="toAddress" value="" required>
+        </div>
+
+        <div class="">
+          <label for="Value">Value / Amount to Send</label>
+          <input type="text" class="form-control" palceholder="Amount" name="amount" value="" required>
+        </div>
+
+        <div class="form-group">
+          <label for="Gas Limit">Gas Limit</label>
+          <input type="text" class="form-control" name="gasLimit" value="">
+        </div>
+
+        <div class="form-group">
+          <label for="Gas Price">Gas Price</label>
+          <input type="text" class="form-control" name="gasPrice" value="">
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success pull-right asset">Generate Transaction</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </body>
+</html>
